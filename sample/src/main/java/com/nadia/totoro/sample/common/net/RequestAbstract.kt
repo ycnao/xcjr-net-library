@@ -7,7 +7,6 @@ import com.xcjr.lib.net.http.HttpRequestCallback
 import com.xcjr.lib.net.RequestAPIAbstract
 import com.xcjr.lib.net.https.OkHttpUtils
 import com.xcjr.lib.net.util.Base64Util
-import com.xcjr.lib.net.util.MD5Util
 import org.json.JSONObject
 import java.io.File
 
@@ -37,8 +36,7 @@ abstract class RequestAbstract : RequestAPIAbstract() {
 
 		//加密
 		val base64 = Base64Util().getBase64(jsonObject.toString())
-		val md5 = MD5Util().getMD5Str("${Constants.APP_ID}${Constants.APP_SECRET}")
-		val header = OkHttpUtils.getHeader(md5, Constants.ENCRYPT, Constants.SYSTEM_SOURCE_SECRET_KEY)!!.toString()
+		val header = OkHttpUtils.getHeader(Constants.APP_ID, Constants.APP_SECRET, Constants.ENCRYPT, Constants.SYSTEM_SOURCE_SECRET_KEY)!!.toString()
 		val token = Base64Util().getBase64(header)
 		uploadByJsonObject(Constants.UPLOAD_SERVER, action, base64, file, token, callback)
 	}
