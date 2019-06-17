@@ -1,4 +1,4 @@
-package com.nadia.totoro.common.net
+package com.nadia.totoro.sample.common.net
 
 import android.content.Context
 import com.xcjr.lib.net.http.HttpRequestCallback
@@ -20,5 +20,4 @@ class RequestTest(private val mContext: Context) : RequestAbstract() {
 		jsonObject.put("password", password)
 		request(mContext, "${"网络服务"}.login", jsonObject, callback)
 	}
-
 }

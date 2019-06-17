@@ -2,8 +2,6 @@ package com.xcjr.lib.net.https;
 
 import android.annotation.SuppressLint;
 
-import com.xcjr.lib.net.util.MD5Util;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -25,28 +23,13 @@ import javax.net.ssl.X509TrustManager;
  */
 public class OkHttpUtils {
 	
-	/**
-	 * 应用序号
-	 */
-	public static String appId = "1548668998392";
-	/**
-	 * 应用程序的密钥
-	 */
-	public static String appSecret = "dad7f1aef3f04c859ff67dde1b257ba6";
-	/**
-	 * 关联系统来源表唯一密钥值
-	 */
-	public static String systemSourceSecretKey = "bbf05a14995d4bc9a5b3df2fc0217d03";
-	/**
-	 * 加密解密(AES DES 区块链)  默认 以太坊算法
-	 */
-	public static String encrypt = "333ac1d45283456e61e8e013be552b5b9e4fb495304f0ca680bb258fd616e9ee";
+	public OkHttpUtils() {
+	}
 	
-	public static JSONObject getHeader() {
+	public static JSONObject getHeader(String md5, String encrypt, String systemSourceSecretKey) {
 		JSONObject header = new JSONObject();
 		try {
-			String token = new MD5Util().getMD5Str(appId.concat(appSecret));
-			header.put("token", token);
+			header.put("token", md5);
 			header.put("encrypt", encrypt);
 			header.put("systemSourceSecretKey", systemSourceSecretKey);
 			return header;
@@ -78,6 +61,7 @@ public class OkHttpUtils {
 	}
 	
 	public static class TrustAllManager implements X509TrustManager {
+		
 		@Override
 		public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
 		}
@@ -93,6 +77,7 @@ public class OkHttpUtils {
 	}
 	
 	public static class TrustAllHostnameVerifier implements HostnameVerifier {
+		
 		@Override
 		public boolean verify(String hostname, SSLSession session) {
 			return true;

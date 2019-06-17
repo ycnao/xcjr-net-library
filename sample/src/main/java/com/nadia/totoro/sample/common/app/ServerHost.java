@@ -1,4 +1,4 @@
-package com.nadia.totoro.common.app;
+package com.nadia.totoro.sample.common.app;
 
 /**
  * 网络配置
