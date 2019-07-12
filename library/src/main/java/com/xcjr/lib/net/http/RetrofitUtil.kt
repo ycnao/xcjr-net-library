@@ -1,6 +1,8 @@
 package com.xcjr.lib.net.http
 
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import java.util.concurrent.TimeUnit
 
 /**
  *
@@ -10,6 +12,10 @@ import retrofit2.Retrofit
 class RetrofitUtil {
 
     private var retrofit: Retrofit? = null
+    private val client = OkHttpClient.Builder()
+        .connectTimeout(100, TimeUnit.SECONDS)
+        .readTimeout(100, TimeUnit.SECONDS)
+        .writeTimeout(100, TimeUnit.SECONDS).build()
 
     fun <T> createApi(server: String, clazz: Class<T>): T {
         if (retrofit == null) {
@@ -17,9 +23,10 @@ class RetrofitUtil {
                 if (retrofit == null) {
                     val builder = Retrofit.Builder()
                     builder.baseUrl(server)
+                    builder.client(client)
                     //设置数据解析器
-                    //                    builder.addConverterFactory(GsonConverterFactory.create());
-                    //                    builder.addCallAdapterFactory(RxJavaCallAdapterFactory.create());
+                    // builder.addConverterFactory(GsonConverterFactory.create());
+                    // builder.addCallAdapterFactory(RxJavaCallAdapterFactory.create());
                     retrofit = builder.build()
                 }
             }

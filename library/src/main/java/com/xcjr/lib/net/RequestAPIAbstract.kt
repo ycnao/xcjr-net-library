@@ -17,6 +17,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.io.File
 import java.io.IOException
+import java.util.concurrent.TimeUnit
 
 
 /**
